@@ -75,3 +75,17 @@ b_s(X,Y):-parent(Z,X),parent(Z,Y).
 %b_s(+X).
 b_s(X):-parent(Z,X),man(Z),parent(Z,Y),write(Y),nl,fail.
 
+% Задача 2, Вариант - 2
+
+%son(+X,+Y).
+son(X,Y):-parent(Y,X),man(X).
+
+%son(+X).
+son(X):-parent(X,Y),man(Y),write(Y),nl,fail.
+
+%sister(+X,+Y).
+sister(X,Y):-woman(X),parent(Z,X),parent(Z,Y).
+
+%sisters(+X).
+sisters(X):-parent(Y,X),woman(Y),parent(Y,Z),woman(Z),write(Z),nl,fail.
+
