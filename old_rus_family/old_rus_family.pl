@@ -89,3 +89,26 @@ sister(X,Y):-woman(X),parent(Z,X),parent(Z,Y).
 %sisters(+X).
 sisters(X):-parent(Y,X),woman(Y),parent(Y,Z),woman(Z),write(Z),nl,fail.
 
+% Задача 3, Вариант - 2 
+woman(miroslava).
+man(bogdan).
+
+parent(miroslava,zhdana).
+parent(miroslava,boguslav).
+parent(bogdan,zhdana).
+parent(bogdan,boguslav).
+
+%grand_ma(+X,+Y).
+grand_ma(X,Y):-parent(Z,Y),parent(X,Z),woman(X).
+
+%grand_mas(+X).
+grand_mas(X):-parent(Y,X),parent(Z,Y),woman(Z),nl,fail.
+
+%grand_pa_and_son(+X,+Y).
+grand_pa_and_son(X,Y):-parent(Z,Y),man(Z),parent(X,Z).
+
+%uncle(+X,+Y).
+uncle(X,Y):-man(X),brother(X,Z),parent(Z,Y).
+
+%uncles(+X).
+uncles(X):-parent(Y,X),man(Y),brother(Y,Z),print(Z),nl,fail.
