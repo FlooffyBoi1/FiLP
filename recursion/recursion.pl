@@ -47,3 +47,24 @@ dig_sum(X,Sum):-X1 is X//10,Y is X mod 10, dig_sum(X1,Sum1), Sum is Sum1+Y,!.
 remove_by_dig_sum(_,[],[]):-!.
 remove_by_dig_sum(DS1,[H|T],Lout):-dig_sum(H,DS2),DS2 == DS1,remove_by_dig_sum(DS1,T,Lout).
 remove_by_dig_sum(DS1,[H|T1],[H|T2]):-dig_sum(H,DS2),DS2 =\= DS1,remove_by_dig_sum(DS1,T1,T2).
+
+% Задача 2 (Вариант - 2)
+
+% max_dig(+N,?Result)
+max_dig(0,0):-!.
+max_dig(N,D):-N1 is N//10,max_dig(N1,R),D is N mod 10, D>R,!.
+max_dig(N,R):-N1 is N//10,max_dig(N1,R),D is N mod 10, R>=D,!.
+
+% sum_dig3(+N,?Result)
+sum_dig3(0,0):-!.
+sum_dig3(N,Result):-N1 is N//10,sum_dig3(N1,R1),D is N mod 10,3 is D, Result is R1+D,!.
+sum_dig3(N,Result):-N1 is N//10,sum_dig3(N1,R1),D is N mod 10,6 is D, Result is R1+D,!.
+sum_dig3(N,Result):-N1 is N//10,sum_dig3(N1,R1),D is N mod 10,9 is D, Result is R1+D,!.
+sum_dig3(N,Result):-N1 is N//10,sum_dig3(N1,R1),D is N mod 10,Result is R1,!.
+
+% del_count(+N,?Result)
+del_count(N,Result):-del_count(N,N,Result),!.
+% del_count(+CurN,+N,?Result)
+del_count(1,_,1):-!.
+del_count(CurN,N,Result):-NextN is CurN-1,del_count(NextN,N,R1),0 is N mod CurN,Result is R1+1,!.
+del_count(CurN,N,R1):-NextN is CurN-1,del_count(NextN,N,R1).
