@@ -68,3 +68,37 @@ del_count(N,Result):-del_count(N,N,Result),!.
 del_count(1,_,1):-!.
 del_count(CurN,N,Result):-NextN is CurN-1,del_count(NextN,N,R1),0 is N mod CurN,Result is R1+1,!.
 del_count(CurN,N,R1):-NextN is CurN-1,del_count(NextN,N,R1).
+
+
+% Задача 3 (Вариант - 2 (2,23,31))
+
+%list_length(+L,?N):
+list_length([],0):-!.
+list_length([H|T],N):-list_length(T,NPrev),N is NPrev+1.
+
+%3.2
+
+%min_list_index(+List,?Index)
+%Находит индекс минимального элемента списка (индексы с 0)
+min_list_index([H|T],I):-list_length([H|T],Length),min_list_index([H|T],Min,Length,MinI),I is Length-MinI,!.
+%min_list_index(+L,+MinElem,+CurIndex,-MinIndex)
+min_list_index([H],H,1,1):-!.
+min_list_index([H|T],H,I,I):-min_list_index(T,MinPrev,IPrev,_),I is IPrev+1,H<MinPrev,!.
+min_list_index([H|T],MinPrev,I,MinI):-min_list_index(T,MinPrev,IPrev,MinI),I is IPrev+1,!.
+
+%3.23
+
+% min2_list(+List,?Min1,?Min2)
+% Находит два наименьших элемента списка
+min2_list([H],H,H):-!.
+min2_list([H|T],H,Min1):-min2_list(T,Min1,Min2),H<Min1.
+min2_list([H|T],Min1,Min2):-min2_list(T,Min1,Min2).
+
+%3.31
+
+% count_even(+L,?N)
+% Находит количество чётных элементов в списке.
+count_even([],0):-!.
+count_even([H|T],N):-count_even(T,NPrev),N is NPrev+1,0 is H mod 2.
+count_even([H|T],N):-count_even(T,N),1 is H mod 2.
+
